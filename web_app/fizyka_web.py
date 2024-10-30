@@ -3,6 +3,10 @@ from dash import dcc, html, Input, Output, State
 import numpy as np
 import plotly.graph_objs as go
 import dash_bootstrap_components as dbc
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.serving import run_simple
+from flask import Flask
+from waitress import serve
 
 np.set_printoptions(suppress=True)
 
@@ -137,4 +141,8 @@ def update_graph(n_clicks, rownania, points_limit, step, czastki_values):
     return fig
 
 if __name__ == '__main__':
-    app.run_server(debug=True, host='0.0.0.0', port=8080)
+    server = Flask(__name__)
+    server.wsgi_app = DispatcherMiddleware(server.wsgi_app, {
+        '/': app.server
+    })
+    serve(server, host='0.0.0.0', port=8080)
