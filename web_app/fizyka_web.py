@@ -137,33 +137,4 @@ def update_graph(n_clicks, rownania, points_limit, step, czastki_values):
     return fig
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
-    # Create a new file named vercel.json in the root directory of your project with the following content:
-    {
-        "builds": [
-            {
-                "src": "fizyka_web.py",
-                "use": "@vercel/python"
-            }
-        ],
-        "routes": [
-            {
-                "src": "/(.*)",
-                "dest": "fizyka_web.py"
-            }
-        ]
-    }
-
-    # Ensure you have a requirements.txt file with all the dependencies listed:
-    dash
-    dash-bootstrap-components
-    numpy
-    plotly
-
-    # Push your project to a GitHub repository.
-
-    # Go to Vercel's website and sign up or log in.
-
-    # Create a new project and import your GitHub repository.
-
-    # Vercel will automatically detect the vercel.json file and deploy your Dash app.
+    app.run_server(debug=True, host='0.0.0.0', port=8080)
